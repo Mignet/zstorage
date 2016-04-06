@@ -1,0 +1,12 @@
+syntax: glob
+x86
+x64
+ipch
+*.suo
+*.sdf
+*.opensdf
+*.user
+*.nupkg
+*.aps
+syntax: regexp
+packages/.*[0-9].*

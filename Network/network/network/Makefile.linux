@@ -1,0 +1,97 @@
+# Copyright (c) 2006 HXHT, Inc.  All rights reserved.
+#  
+
+#compiler and linker
+
+_LINUX64          =       1
+
+C			=	gcc -g
+CXX			=	g++ -g
+CC			=	gcc -g
+
+LINKER		=	g++ -g
+MAKE		=	make
+
+#source code dir
+VPATH		:= ./
+
+#compile macro 
+OS_MACRO	=	-D__GCC__ -D__Posix__ -D__Linux__
+
+#control version save-dir
+BIN_DIR		=	../../bin/
+OBJ_DIR 	=	../Temp/
+
+_DEBUG		=	1
+ifdef _DEBUG
+ifdef _LINUX64
+TARGET         =        ../../../lib64/libmwk.so
+else
+TARGET          =       ../../bin/libmwk.so
+endif
+
+COM_CFG		=	-D_DEBUG
+CCFLAGS		= 	-g
+else
+TARGET		=	../../bin/libmwk.so
+COM_CFG		=	
+CCFLAGS     +=  -O2
+endif
+
+COM_CFG		=	
+
+SYS_LIBS	=
+LIBS		=	$(SYS_LIBS)
+
+# EACH DIRECTORY WITH HEADERS MUST BE APPENDED IN THIS MANNER TO THE CCFLAGS
+ifdef _LINUX64
+
+CCFLAGS     += -I../../../Base_Inc -I../../libevent
+
+else
+
+CCFLAGS     +=  -L/usr/lib  -I/usr/local/include -I/usr/include  -I../../libevent -I ../../libevent/compat/sys -I../../../Include -I../../../Baselib -I../../../Base_Inc
+
+endif
+
+# EACH DIRECTORY WITH A STATIC LIBRARY MUST BE APPENDED IN THIS MANNER TO THE LINKOPTS
+
+CXXFLAGS	:=	$(CCFLAGS) $(OS_MACRO) $(COM_CFG)
+
+CFILES		=	
+
+CPPFILES	=		c_basis.cpp				\
+				rawtcpacceptor.cpp			\
+				rawtcpconnect.cpp			\
+				ref.cpp					\
+				nettimer.cpp			\
+				stdafx.cpp				\
+				libevent.cpp				\
+				evthread.cpp				\
+				socketbase.cpp				\
+				mnetwork.cpp				\
+				c_pipe.cpp	
+
+OBJS        =   $(addprefix $(OBJ_DIR), $(notdir $(CFILES:%.c=%.o)))
+OBJS		+=	$(addprefix $(OBJ_DIR), $(notdir $(CPPFILES:%.cpp=%.o)))
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(LINKER) -shared $(CXXFLAGS) -o $(LIBS)  $@ $(OBJS)
+
+#$(OBJS):$($(notdir $@):%.o=%.cpp)
+$(OBJ_DIR)%.o:%.cpp
+	$(CXX) $(CXXFLAGS) -fPIC -c $^ -o $@
+
+$(OBJ_DIR)%.o:%.c
+	$(CC) $(CXXFLAGS)  -fPIC -c $^ -o $@
+check:
+	ldd -r $(NAME)
+clean:
+	-rm -f $(OBJS) 
+	-rm -f $(TARGET)
+rmbin:
+	-rm -f $(TARGET)
+cleanall: clean rmbin all
+.PHONY:all check clean cleanall

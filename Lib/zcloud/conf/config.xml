@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<xml_root>
+        <server>
+                <ip>127.0.0.1</ip>
+                <port>8888</port>
+                <threads>9</threads>
+				<!--延时的命令单位:毫秒-->
+				<delay>2</delay>
+        </server>
+		
+		<storage>
+			<interval>0000#FFFF</interval>
+			<constr>{"server":"127.0.0.1", "port":7001}</constr>
+		</storage>
+
+</xml_root>

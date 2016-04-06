@@ -1,0 +1,31 @@
+libevent
+
+在Linux下可以直接去官网下载（libevent-1.4.13-stable）
+Windows下直接编译成Release版本
+
+
+Network编译
+
+Linux下编译   make cleanall -f Makefile.linux
+Windows下直接编译成Release版本
+
+
+zredis编译
+
+Linux下编译 make cleanall -f Makefile.linux
+Windows下直接编译成Release版本
+
+zcloud
+
+Linux下编译 make cleanall -f Makefile.linux
+Windows下直接编译成Release版本
+
+zstorage
+
+Linux下编译 make cleanall -f Makefile.linux
+Windows下直接编译成Release版本
+
+
+
+
+

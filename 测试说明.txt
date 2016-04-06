@@ -1,0 +1,24 @@
+1.运行  start.bat
+
+
+2.运行 test.bat 开始测试  参见zstorage云存储服务器操作设计说明
+
+注如果：
+
+
+注：test.bat 为是用telnet工具登录后如果一片黑，可以输任意键回车 会返回 -Unknown command. 是正常情况
+通信协议采用redis协议
+
+Windows上telnet输入错误不支持退格键，只能回车再重输入
+
+示列: 
+
+TTL 0 KEY myapp	SET zstorage  ==》回车
+
+获取
+
+TTL 0 KEY myapp GET	==》回车
+
+
+因为采用标准redis协议所以在程序调用上同时支持redis客户端调用(c/c++ java C# Perl php lua 等语言都可以支持)
+

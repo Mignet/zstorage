@@ -1,0 +1,38 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MNetwork", "network\MNetworkvs2003.vcproj", "{DDB5FFC5-EE47-4002-A7D1-F16808835A2D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{019ECAD6-896B-4F5B-8FA5-0B7AF5D1951C} = {019ECAD6-896B-4F5B-8FA5-0B7AF5D1951C}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libevent", "..\libevent-1.4.7-stable-win32\WIN32-Prj\libevent.vcproj", "{019ECAD6-896B-4F5B-8FA5-0B7AF5D1951C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_sqlite", "..\..\lib_sqlite\lib_sqlite\lib_sqlite_vc2003.vcproj", "{40EEA15A-4847-4042-99C2-DE9C72CDE567}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{DDB5FFC5-EE47-4002-A7D1-F16808835A2D}.Debug.ActiveCfg = Debug|Win32
+		{DDB5FFC5-EE47-4002-A7D1-F16808835A2D}.Debug.Build.0 = Debug|Win32
+		{DDB5FFC5-EE47-4002-A7D1-F16808835A2D}.Release.ActiveCfg = Release|Win32
+		{DDB5FFC5-EE47-4002-A7D1-F16808835A2D}.Release.Build.0 = Release|Win32
+		{019ECAD6-896B-4F5B-8FA5-0B7AF5D1951C}.Debug.ActiveCfg = Debug|Win32
+		{019ECAD6-896B-4F5B-8FA5-0B7AF5D1951C}.Debug.Build.0 = Debug|Win32
+		{019ECAD6-896B-4F5B-8FA5-0B7AF5D1951C}.Release.ActiveCfg = Release|Win32
+		{019ECAD6-896B-4F5B-8FA5-0B7AF5D1951C}.Release.Build.0 = Release|Win32
+		{40EEA15A-4847-4042-99C2-DE9C72CDE567}.Debug.ActiveCfg = Debug|Win32
+		{40EEA15A-4847-4042-99C2-DE9C72CDE567}.Debug.Build.0 = Debug|Win32
+		{40EEA15A-4847-4042-99C2-DE9C72CDE567}.Release.ActiveCfg = Release|Win32
+		{40EEA15A-4847-4042-99C2-DE9C72CDE567}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

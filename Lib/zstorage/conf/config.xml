@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<xml_root>
+        <server>
+                <ip>127.0.0.1</ip>
+                <port>7001</port>
+                <threads>9</threads>
+				 <!--leavedb路径-->
+                <leavedb>data\file</leavedb>
+                <!--内部缓存大小 MB-->
+                <cache>1024</cache>
+                <!--写缓存大小 MB-->
+                <write_buffer_size>256</write_buffer_size>
+				<!--list最大单元数-->
+                <list_max_count>1024</list_max_count>
+				<!--mlist最大单元数-->
+                <mlist_max_count>99</mlist_max_count>
+				<!--seq超时时间单位秒-->
+                <seq_valid_time>43200</seq_valid_time>
+				<!--seq清理间隔-->
+                <seq_clear_time>10</seq_clear_time>
+				<!--对象在内存中有效期-->
+                <object_effective>5</object_effective>
+        </server>
+
+</xml_root>

@@ -1,0 +1,81 @@
+# Copyright (c) 2006 HXHT, Inc.  All rights reserved.
+#  
+
+_LINUX64		=	1
+#compiler and linker
+C			=	gcc 
+CXX			=	g++ 
+CC			=	gcc 
+LINKER		=	g++ 
+MAKE		=	make
+
+#source code dir
+VPATH		:=	.:../../../include/zredis
+
+#compile macro 
+OS_MACRO	=	-D__GCC__ -D__Posix__ -D__Linux__
+
+#control version save-dir
+ifdef _LINUX64
+BIN_DIR		=	../Bin64/
+else
+BIN_DIR         =       ../Bin/
+endif
+OBJ_DIR 	=	../Temp/
+
+#_DEBUG		=	1
+ifdef _DEBUG
+TARGET		=	$(BIN_DIR)zcloud.exe
+COM_CFG		=	-D_DEBUG
+CCFLAGS		+=	-g -fPIC -Wchar-subscripts -Wcomment -Wformat -Wmissing-braces -Wparentheses -Wsequence-point -Wswitch  -Wuninitialized -Winline -Wmissing-declarations -Wlong-long -Werror
+
+else
+TARGET		=	$(BIN_DIR)zcloud.exe
+COM_CFG		=	
+CCFLAGS     	+=  -O2 -g
+endif
+
+COM_CFG		=	-D_PRINT_SCREEN -DIM_CHAT
+
+SYS_LIBS	=	-levent -lmwk  -lmysqlclient -llog4cxx -lapr-1 -laprutil-1 -lhiredis -lyunva -lzredis -lcJSON -lleveldb
+
+LIBS		=	$(SYS_LIBS)
+
+# EACH DIRECTORY WITH HEADERS MUST BE APPENDED IN THIS MANNER TO THE CCFLAGS
+CCFLAGS     +=  -L../../../lib64
+CCFLAGS     +=  -I/usr/local/include -I./ -I../../../Base_Inc -I../../../include -I../../../include/zredis  -I../../leveldb/include -I../../leveldb
+CCFLAGS     += 	-I../../../Base_Inc/log4cxx/include/
+# EACH DIRECTORY WITH A STATIC LIBRARY MUST BE APPENDED IN THIS MANNER TO THE LINKOPTS
+
+CXXFLAGS	:=	$(CCFLAGS) $(OS_MACRO) $(COM_CFG)
+
+CFILES      =
+
+CPPFILES    =         	zcloud.cpp		\
+			c_server.cpp		\
+			z_command.cpp		\
+
+
+OBJS        =   $(addprefix $(OBJ_DIR), $(notdir $(CFILES:%.c=%.o)))
+OBJS		+=	$(addprefix $(OBJ_DIR), $(notdir $(CPPFILES:%.cpp=%.o)))
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(LINKER) -o $@ $(OBJS) $(CXXFLAGS) $(LIBS) 
+
+#$(OBJS):$($(notdir $@):%.o=%.cpp)
+$(OBJ_DIR)%.o:%.cpp
+	$(CXX) $(CXXFLAGS) -c $^ -o $@
+
+$(OBJ_DIR)%.o:%.c
+	$(CC) $(CXXFLAGS)  -c $^ -o $@
+check:
+	ldd -r $(NAME)
+clean:
+	-rm -f $(OBJS) 
+	-rm -f $(TARGET)
+rmbin:
+	-rm -f $(TARGET)
+cleanall: clean rmbin all
+.PHONY:all check clean cleanall
